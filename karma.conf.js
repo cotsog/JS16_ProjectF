@@ -1,5 +1,5 @@
 var webpack = require('webpack');
-var webpackConfig = require('./webpack.dev.config.js');
+var webpackConfig = require('../configWebpack/dev.js');
 webpackConfig.entry = {};
 
 module.exports = function (config) {
