@@ -5,13 +5,19 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-var analytics;
+var analytics, api, https, prefix;
 try {
     var json = require('./config/config.json');
     analytics = json.google_analytics.key;
+    api = json.api.host;
+    https = json.api.https ? "https://" : "http://";
+    prefix = json.api.prefix;
 } catch (err) {
     console.log(err);
     analytics = process.env.ANALYTICS;
+    api = process.env.API;
+    https = process.env.PROTOCOL;
+    prefix = process.env.PREFIXDIR;
 }
 
 var config = {
@@ -86,7 +92,15 @@ var config = {
             }
         }),
         new ExtractTextPlugin("/style.css"),
-        new webpack.DefinePlugin({GA_TRACKING_CODE: JSON.stringify(analytics)})
+        new webpack.DefinePlugin({
+            GA_TRACKING_CODE: JSON.stringify(analytics),
+            'process.env':{
+                'NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+                '__API__': JSON.stringify(api),
+                '__PROTOCOL__': JSON.stringify(https),
+                '__PREFIX__': JSON.stringify(prefix)
+            },
+        })
     ]
 };
 

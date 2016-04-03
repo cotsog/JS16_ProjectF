@@ -4,8 +4,10 @@
   },
 
 
-  "apiA": {
-    "url": "https://got-api.bruck.me/api/"
+  "api": {
+    "https": true,
+    "host": "api.got.show",
+    "prefix": "/api/"
   },
 
 
@@ -24,27 +26,24 @@
         "access_token_secret": "xxx"
     },
 
-    "databaseA" : {
+    "database" : {
       "_comment": "This is the access to the database, where the tweets are stored by the package",
-      "token" : "xxxxxxxxxxxxxxxxx",
-      "airDateURL" : "xxxxxxxxxxxxxxxxx",
-      "characterNamesURL" : "xxxxxxxxxxxxxxxxx"
+      "airDateURL": "https://api.got.show/api/episodes/find?token=<TOKEN>",
+      "characterNamesURL": "https://api.got.show/api/characters/",
+      "sentimentSave": "https://api.got.show/api/sentiment?token=<TOKEN",
+      "sentimentGetChar": "https://api.got.show/api/sentiment/find?token=<TOKEN>",
+      "sentimentGetAll": "https://api.got.show/api/sentiment/byTimeRange?beginDate=startdate&endDate=enddate"
     },
 
     "automation" : {
-      "_comment": "This is the access token to access the database from https://github.com/Rostlab/JS16_ProjectA",
       "minutes" : 12
     }
   },
 
   "gotsent": {
+        "_comment": "More info https://www.npmjs.com/package/gotsentimental",
         "mongodb": {
             "uri": "mongodb://<user>:<pass>@<server>/<db>"
-        },
-        "api": {
-            "https": true,
-            "host": "got-api.bruck.me",
-            "prefix": "/api/"
         },
         "twitter": {
             "access_token": "",
